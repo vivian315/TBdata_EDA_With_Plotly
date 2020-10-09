@@ -1,6 +1,6 @@
 # TBdata_EDA_With_Plotly
 
-数据为2020年9月25日收集的维生素商品根据销量倒序排列前440条数据
+数据为2020年9月25日收集的维生素商品根据销量倒序排列前440条数据, 数据文件参照tb_vitamin_20200925.csv
 
 1、数据描述
 
@@ -29,8 +29,7 @@
 
 3、EDA-Exploratory Data Analysis <br>
 3.1 总体统计
-
-     图形展示结果, 其中价格从3元到596元，销售数量从800到100K
+    其中,440条数据中商品数430个，店铺178家，价格从3元到596元，销售数量从800到100K
 
    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png?raw=true)
 
