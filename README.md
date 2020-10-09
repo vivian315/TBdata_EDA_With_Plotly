@@ -27,4 +27,4 @@
     数据大小：   5280
 
 
-![Overall Stat](https://github.com/vivian315/TBdata_EDA_With_Plotly/raw/master/screenshots/p4.png)
+![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png)
