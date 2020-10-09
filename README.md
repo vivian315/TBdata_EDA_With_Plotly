@@ -25,3 +25,6 @@
   ```
     数据纬度：   (440, 12) 
     数据大小：   5280
+
+
+![Overall Stat](https://github.com/vivian315/TBdata_EDA_With_Plotly/raw/master/screenshots/p4.png)
