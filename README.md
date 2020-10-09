@@ -54,7 +54,7 @@ fig.add_trace(go.Indicator(
 ))
 fig.add_trace(go.Indicator(
     mode="number",
-    value=pricemax,
+    value=len(stores),
     title={'text': "店铺数", "font": {"color": "green", "size": 20}},
     number={"font": {"color": "green", "size": 50}},
     domain={"row": 0, "column": 1}
@@ -75,15 +75,8 @@ fig.add_trace(go.Indicator(
     delta={'position': "bottom", 'reference': salesmax - salemin},
     domain={"row": 0, "column": 3}
 ))    
-fig.add_trace(go.Indicator(
-    mode="number",
-    value=len(stores),
-    title={'text': "店铺数","font": {"color": "gray","size":20}},
-    number={"font": {"color": "gray", "size": 50}},
-    domain={"row": 0, "column": 4}
-))
 fig.update_layout(
-    grid={'rows': 1, 'columns': 5, 'pattern': "independent"})
+    grid={'rows': 1, 'columns': 4, 'pattern': "independent"})
 fig.show()
 ```    
 </details>
