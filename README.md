@@ -29,30 +29,22 @@
 
 3、EDA-Exploratory Data Analysis <br>
 3.1 总体统计
-    
-<details>
-<summary>数据统计代码</summary>
-
-```python
-    goods = tbdata["title"].unique()
-    stores = tbdata["storeName"].unique()
-    pricemax = tbdata["price"].max()
-    pricemin = tbdata["price"].min()
-    salesmax = tbdata["sales"].max()
-    salemin = tbdata["sales"].min()
-``` 
-
-</details>
 
      图形展示结果, 其中价格从3元到596元，销售数量从800到100K
 
    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png?raw=true)
 
 <details>
-    <summary> plotly图形展示代码 </summary>
+    <summary> 点击展开代码 </summary>
 
 ``` python
-# plotly图形展示
+goods = tbdata["title"].unique()
+stores = tbdata["storeName"].unique()
+pricemax = tbdata["price"].max()
+pricemin = tbdata["price"].min()
+salesmax = tbdata["sales"].max()
+salemin = tbdata["sales"].min()
+
 fig = go.Figure()
 fig.add_trace(go.Indicator(
     mode="number",
