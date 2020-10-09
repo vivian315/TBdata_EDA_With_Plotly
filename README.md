@@ -46,7 +46,7 @@
 
      图形展示结果, 其中价格从3元到596元，销售数量从800到100K
 
-   ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p5.png?raw=true)
+   ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png?raw=true)
 
 <details>
     <summary> plotly图形展示代码 </summary>
