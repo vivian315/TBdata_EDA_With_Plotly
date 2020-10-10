@@ -26,9 +26,35 @@
     数据纬度：   (440, 12) 
     数据大小：   5280
 
+3、数据整理
+    为了统计需要，将价格整理成价格区间，新增两列，价格区间索引和价格区间字符串
+    
+<details>
+    <summary> 代码 </summary>
+    
+``` python
+# ps_sort, 价格区间索引
+tbdata.insert(3,"ps_sort",0)
+# price_section, 价格区间 (0,50] 表示 大于0元，小于等于50.00元
+tbdata.insert(4,"price_section","(0,50]")
 
-3、EDA-Exploratory Data Analysis <br>
-3.1 总体统计
+#根据price的值，填充ps_sort和 price_section列
+i = 1
+while i < 10:
+    if i == 9:
+        str_ps = "(%d,~)" % (i * 50)
+    else:
+        str_ps = "(%d,%d]" % (i*50,(i+1)*50)
+    tbdata.loc[tbdata.price > i*50, ("ps_sort", "price_section")] = [i, str_ps]
+    i += 1
+
+#将整理好的数据写入新的csv文件
+tbdata.to_csv("tb_vitamin_02.csv")    
+```
+</details>
+   
+4、EDA-Exploratory Data Analysis <br>
+4.1 总体统计
     其中,440条数据中商品数430个，店铺178家，价格从3元到596元，销售数量从800到100K
 
    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png?raw=true)
