@@ -106,3 +106,37 @@ fig.update_layout(
 fig.show()
 ```    
 </details>
+
+4.2 按价格区间统计商品数量
+    图表如下，说明维生素价格主要在200元以下，其中50元以下最多
+    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p5.png?raw=true)
+    
+<details>
+<summary>点击展开代码</summary>
+    
+``` python
+    pricewise = tbdata.groupby(['ps_sort', 'price_section'])['title'].count().reset_index()
+    fig = go.Figure(go.Bar(x=pricewise['price_section'], y=pricewise['title'],
+                           marker={'color': pricewise['title'], 'colorscale': 'Viridis'}))
+    fig.update_layout(title_text='价格区间商品数', xaxis_title='价格区间', yaxis_title='所含商品数')
+    fig.show()
+```
+</details>
+
+
+或用饼图展示
+   ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p6.png?raw=true)
+   
+<details>
+<summary>点击展开饼图代码</summary>
+    
+``` python
+
+pricewise = tbdata.groupby(['price_section'])['title'].count().reset_index()
+fig = go.Figure(go.Pie(labels=pricewise['price_section'], values=pricewise['title'], hole=0.7, rotation=30,
+                   hoverinfo="label+percent", textinfo="label+value+percent"))
+fig.update_layout(title_text='价格区间商品占比')
+fig.show()
+
+```
+</details>
