@@ -161,7 +161,7 @@ fig.show()
 4.3 按店铺分析
 
     4.3.1 店铺商品数量统计
-    图表如下，除了阿里健康大药房的商品种类达78种，前十店铺中商品集中在7-20中，前50店铺中大多只有2～5中维生素产品
+    图表如下，除了阿里健康大药房的商品种类达78种，前十店铺中商品集中在7-20中，前30店铺中大多只有2～5中维生素产品
     
 <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p8.png" width="450" alt="按店铺" /> <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p9.png" width="450" alt="按店铺" />
       
@@ -181,10 +181,10 @@ fig.show()
                name='Top 10',
                marker={'color': storewise['title'][:10], 'colorscale': 'Earth'}))
     fig.add_trace(
-        go.Bar(x=storewise['storeName'][:50],
-               y=storewise['title'][:50],
-               name='Top 50',
-               marker={'color': storewise['title'][:50], 'colorscale': 'Earth'},
+        go.Bar(x=storewise['storeName'][:30],
+               y=storewise['title'][:30],
+               name='Top 30',
+               marker={'color': storewise['title'][:30], 'colorscale': 'Earth'},
                visible=False))
 
     fig.update_layout(
@@ -200,10 +200,10 @@ fig.show()
                          method="update",
                          args=[{"visible": [True, False]},
                                {"title": "Top10 商铺数量店铺"}]),
-                    dict(label="Top 50",
+                    dict(label="Top 30",
                          method="update",
                          args=[{"visible": [False, True]},
-                               {"title": "Top50 商铺数量店铺"}]),
+                               {"title": "Top30 商铺数量店铺"}]),
                 ]),
             )
         ])
@@ -240,7 +240,7 @@ fig.show()
         go.Bar(x=storewise['storeName'][:30],
                y=storewise['sales'][:30],
                text=storewise['sales'][:30],
-               name='Top 50',
+               name='Top 30',
                marker={'color': storewise['sales'][:30], 'colorscale': 'Earth'},
                visible=False))
 
