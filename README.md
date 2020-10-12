@@ -54,8 +54,8 @@ tbdata.to_csv("tb_vitamin_02.csv")
 </details>
    
 4、EDA-Exploratory Data Analysis <br>
-    4.1 总体统计
-    其中,440条数据中商品数430个，店铺178家，价格从3元到596元，销售数量从800到100K
+4.1 总体统计
+其中,440条数据中商品数430个，店铺178家，价格从3元到596元，销售数量从800到100K
 
    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p4.png?raw=true)
 
@@ -107,10 +107,10 @@ fig.show()
 ```    
 </details>
 
-    4.2 价格区间分析
-        4.2.1 按价格区间统计商品数量
+4.2 价格区间分析
+4.2.1 按价格区间统计商品数量
         图表如下，说明维生素价格主要在200元以下，其中50元以下最多
-![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p5.png?raw=true)
+![按价格区间](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p5.png?raw=true)
     
 <details>
 <summary>点击展开代码</summary>
@@ -126,7 +126,7 @@ fig.show()
 
 
         或用饼图展示
-![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p6.png?raw=true)
+![按价格区间](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p6.png?raw=true)
    
 <details>
 <summary>点击展开饼图代码</summary>
@@ -142,9 +142,9 @@ fig.show()
 ```
 </details>
 
-        4.2.2 按价格区间统计维生素的销售量
-        图表如下，说明维生素销售量与商品数一致，主要集中在价格200元以下的，其中50元以下最多
-![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p7.png?raw=true)
+4.2.2 按价格区间统计维生素的销售量
+图表如下，说明维生素销售量与商品数一致，主要集中在价格200元以下的，其中50元以下最多
+![按价格区间](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p7.png?raw=true)
     
 <details>
     <summary> 点击展开代码 </summary>
@@ -158,6 +158,60 @@ fig.show()
 ```
 </details>
 
-    4.3 按店铺分析
-        4.3.1 店铺商品数量统计
-        
+4.3 按店铺分析
+
+    4.3.1 店铺商品数量统计
+    图表如下，除了阿里健康大药房的商品种类达78种，前十店铺中商品集中在7-20中，前50店铺中大多只有2～5中维生素产品
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p8.png" width="350" alt="按店铺" />
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p9.png" width="350" alt="按店铺" />
+      
+<details>
+    <summary> 点击展开代码 </summary>
+    
+```python
+    
+    storewise = tbdata.groupby('storeName')['title'].count().reset_index()
+    storewise = storewise.sort_values('title', ascending=False).reset_index()
+    storewise.drop("index", axis=1, inplace=True)
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(x=storewise['storeName'][:10],
+               y=storewise['title'][:10],
+               name='Top 10',
+               marker={'color': storewise['title'][:10], 'colorscale': 'Earth'}))
+    fig.add_trace(
+        go.Bar(x=storewise['storeName'][:50],
+               y=storewise['title'][:50],
+               name='Top 50',
+               marker={'color': storewise['title'][:50], 'colorscale': 'Earth'},
+               visible=False))
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="right",
+                active=0,
+                x=0.57,
+                y=1.2,
+                buttons=list([
+                    dict(label="Top 10",
+                         method="update",
+                         args=[{"visible": [True, False]},
+                               {"title": "Top10 商铺数量店铺"}]),
+                    dict(label="Top 50",
+                         method="update",
+                         args=[{"visible": [False, True]},
+                               {"title": "Top50 商铺数量店铺"}]),
+                ]),
+            )
+        ])
+    fig.update_layout(
+        title_text="按店铺商铺数量统计分析",
+        xaxis_domain=[0.05, 1.0]
+    )
+    fig.show()
+    
+```
+</details>
