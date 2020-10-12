@@ -274,3 +274,61 @@ fig.show()
 ```
 
 </details>
+
+4.4 价格区间与店铺销量关系
+
+    图表如下，无商品定价于250～300价格段，阿里健康大药房和天猫国际进口超市各价格段商品均有分布，其它店家基本只有1到2个价格段产品
+    
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p12.png" width="450" /> <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p13.png" width="450" />
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p14.png" width="450"  /> <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p15.png" width="450" />
+      
+<details>
+    <summary> 点击展开代码 </summary>
+    
+```python 
+top7_stores = ['阿里健康大药房', '康恩贝官方旗舰店', '众久旗舰店', '修正官方旗舰店', '汤臣倍健佰健专卖店官',
+           '希希林保健品专营店', '天猫国际进口超市', '天然博士旗舰店']
+perc = tbdata.loc[:, ["ps_sort", "price_section", "storeName", "sales"]]
+perc["total_sales"]= perc.groupby([perc.ps_sort, perc.price_section, perc.storeName])["sales"].transform("sum")
+perc.drop("sales", axis=1, inplace=True)
+perc = perc.drop_duplicates()
+perc = perc.sort_values("ps_sort", ascending=True)
+perc = perc.loc[perc["storeName"].isin(top7_stores)]
+perc = perc.sort_values("ps_sort")
+
+fig = px.bar(perc, x="storeName", y="total_sales",text="total_sales",
+         animation_frame="price_section",animation_group="storeName",
+         hover_name="price_section",
+         range_y=[0, 200000])
+fig.update_traces(textposition='inside')
+fig.update_layout(title_text="Top 7 价格区间销售情况",
+              xaxis_title='店铺名称', yaxis_title='销量')
+fig.show()
+```
+    
+``` python
+# 堆积图代码
+top7_stores = ['阿里健康大药房', '康恩贝官方旗舰店', '众久旗舰店', '修正官方旗舰店', '汤臣倍健佰健专卖店官',
+               '希希林保健品专营店', '天猫国际进口超市', '天然博士旗舰店']
+perc = tbdata.loc[:, ["ps_sort", "price_section", "storeName", "sales"]]
+perc = perc.groupby([perc.ps_sort, perc.price_section, perc.storeName])["sales"].sum().reset_index()
+perc = perc.loc[perc["storeName"].isin(top7_stores)]
+perc = perc.sort_values("ps_sort")
+
+fig = go.Figure()
+i=0
+while i<10:
+    data = perc[perc.ps_sort == i]
+    i += 1
+    if len(data)<1:
+        continue
+    trace_name = data["price_section"].values[0]
+    fig.add_trace(go.Bar(x=data["storeName"], y=data["sales"],
+                         text=data["sales"], name=trace_name))
+
+fig.update_traces(textposition='inside')
+fig.update_layout(title_text="Top 7 价格区间销售情况", barmode="relative",
+                  xaxis_title='店铺名称', yaxis_title='销量')
+fig.show()  
+```
+</details>
