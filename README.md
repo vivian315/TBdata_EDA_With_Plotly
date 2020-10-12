@@ -215,3 +215,62 @@ fig.show()
     
 ```
 </details>
+
+    4.3.3 店铺商品销量统计
+    图表如下，阿里健康大药房商品种类和销量都名列第一，众久旗舰店只有7款产品却贡献126k的销售量，希希林保健品只售2款产品却达到57K销量
+    
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p10.png" width="450" alt="按店铺" /> <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p11.png" width="450" alt="按店铺" />
+      
+<details>
+    <summary> 点击展开代码 </summary>
+    
+```python
+    storewise = tbdata.groupby('storeName')['sales'].sum().reset_index()
+    storewise = storewise.sort_values('sales', ascending=False).reset_index()
+    storewise.drop("index", axis=1, inplace=True)
+
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(x=storewise['storeName'][:10],
+               y=storewise['sales'][:10],
+               text=storewise['sales'][:10],
+               name='Top 10',
+               marker={'color': storewise['sales'][:10], 'colorscale': 'Earth'}))
+    fig.add_trace(
+        go.Bar(x=storewise['storeName'][:30],
+               y=storewise['sales'][:30],
+               text=storewise['sales'][:30],
+               name='Top 50',
+               marker={'color': storewise['sales'][:30], 'colorscale': 'Earth'},
+               visible=False))
+
+    fig.update_traces(textposition='inside')
+
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                type="buttons",
+                direction="right",
+                active=0,
+                x=0.57,
+                y=1.2,
+                buttons=list([
+                    dict(label="Top 10",
+                         method="update",
+                         args=[{"visible": [True, False]},
+                               {"title": "Top10 销量店铺"}]),
+                    dict(label="Top 30",
+                         method="update",
+                         args=[{"visible": [False, True]},
+                               {"title": "Top30 销量店铺"}]),
+                ]),
+            )
+        ])
+    fig.update_layout(
+        title_text="按店铺销售量统计分析",
+        xaxis_domain=[0.05, 1.0]
+    )
+    fig.show()
+```
+
+</details>
