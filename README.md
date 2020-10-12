@@ -162,8 +162,8 @@ fig.show()
 
     4.3.1 店铺商品数量统计
     图表如下，除了阿里健康大药房的商品种类达78种，前十店铺中商品集中在7-20中，前50店铺中大多只有2～5中维生素产品
-<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p8.png" width="350" alt="按店铺" />
-<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p9.png" width="350" alt="按店铺" />
+    
+<img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p8.png" width="450" alt="按店铺" /> <img src="https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p9.png" width="450" alt="按店铺" />
       
 <details>
     <summary> 点击展开代码 </summary>
