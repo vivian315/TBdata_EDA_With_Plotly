@@ -140,3 +140,19 @@ fig.show()
 
 ```
 </details>
+
+4.3 按价格区间统计维生素的销售量
+    图表如下，说明维生素销售量与商品数一致，主要集中在价格200元以下的，其中50元以下最多
+    ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p7.png?raw=true)
+    
+<details>
+    <summary> 点击展开代码 </summary>
+    
+```python    
+    pricewise = tbdata.groupby(['ps_sort', 'price_section'])['sales'].sum().reset_index()
+    fig = go.Figure(go.Bar(x=pricewise['price_section'], y=pricewise['sales'],
+                           marker={'color': pricewise['sales'], 'colorscale': 'Viridis'}))
+    fig.update_layout(title_text='价格区间销量', xaxis_title='价格区间', yaxis_title='销量')
+    fig.show()    
+```
+</details>
