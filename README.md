@@ -158,6 +158,38 @@ fig.show()
 ```
 </details>
 
+4.2.3 销量和评论数与价格关系
+图标如下，维生素销售量和评论主要集中在价格200元以下的，销售量集中在20K以下，评论集中在50K以下，价格50元以下销量和评论数都较高
+![按价格区间](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p17.png?raw=true)
+
+<details>
+    <summary>点击展开代码</summary>
+    
+```python   
+# 一行两列图
+fig = make_subplots(rows=1,cols=2)
+fig.add_trace(go.Scatter(
+    y=tbdata["sales"],
+    x=tbdata["price"],
+    mode="markers",
+    name="销量",
+    marker=dict(
+        color="Teal",
+        size=10,showscale=True)),row=1,col=1)
+fig.add_trace(go.Scatter(
+    y=tbdata["comments"],
+    x=tbdata["price"],
+    mode="markers",
+    name="评论数",
+    marker=dict(
+        color="Gold",
+        size=10,showscale=True)),row=1,col=2)
+
+fig.show()  
+```
+    
+</details>
+
 4.3 按店铺分析
 
     4.3.1 店铺商品数量统计
