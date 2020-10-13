@@ -332,3 +332,25 @@ fig.update_layout(title_text="Top 7 价格区间销售情况", barmode="relative
 fig.show()  
 ```
 </details>
+
+4.5 分词
+4.5.1 商品名称的词云
+    词云显示如下，可见除了常见维生素b6，b2等，在商品名称中多包含容量数，以及买n送n宣传
+    ![词云](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p16.png?raw=true)
+   
+<details>
+    <summary> 点击展开代码 </summary>
+
+```python
+    text = list(set(tbdata["title"]))
+    #注意指定中文词库否则中文不能正确显示
+    wordcloud = WordCloud(font_path="/System/Library/Fonts/PingFang.ttc",
+                          max_font_size=50,
+                          max_words=50,
+                          background_color="white").generate(str(text))
+
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.show()
+```  
+</details
