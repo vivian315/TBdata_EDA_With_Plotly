@@ -449,8 +449,9 @@ fig.show()
 </details>
 
 4.6 按区域统计
-    可见商铺大陆主要集中在广东、浙江、上海和江苏，大陆以外主要是澳大利亚香港
-    ![区域](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p18.png?raw=true)
+
+可见商铺大陆主要集中在广东、浙江、上海和江苏，大陆以外主要是澳大利亚香港
+![区域](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p18.png?raw=true)
    
 <details>
     <summary> 点击展开代码 </summary>
