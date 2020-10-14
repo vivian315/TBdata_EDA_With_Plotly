@@ -1,8 +1,11 @@
 # TBdata_EDA_With_Plotly
 
-数据为2020年9月25日收集的维生素商品根据销量倒序排列前440条数据, 
-数据文件参照:tb_vitamin_20200925.csv
-代码文件参照：edawithplotly.py
+    本文为根据2020年9月25日收集的TB维生素商品根据销量倒序排列前440条数据进行的探索性数据分析
+    python: 3.7.7
+    plotly: 4.11.0
+    
+    数据文件参照:tb_vitamin_20200925.csv
+    代码文件参照：edawithplotly.py
 
 1、数据描述
 
