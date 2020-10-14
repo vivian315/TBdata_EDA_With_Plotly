@@ -174,8 +174,10 @@ fig.show()
 ```
 </details>
 4.2 价格区间分析
-4.2.1 按价格区间统计商品数量
+
+    4.2.1 按价格区间统计商品数量
         图表如下，说明维生素价格主要在200元以下，其中50元以下最多
+        
 ![按价格区间](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p5.png?raw=true)
     
 <details>
