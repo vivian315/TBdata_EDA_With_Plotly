@@ -106,7 +106,68 @@ fig.update_layout(
 fig.show()
 ```    
 </details>
+其中,价格中位数、众数、均值均低于90元
 
+   ![Overall](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p19.png?raw=true)
+   
+<details>
+    <summary> 点击展开代码 </summary>
+    
+``` python    
+    goods = tbdata["title"].unique()
+    stores = tbdata["storeName"].unique()
+    pricemax = tbdata["price"].max()
+    pricemin = tbdata["price"].min()
+    p_median = np.median(tbdata["price"])   #中位数
+    p_mean = np.mean(tbdata["price"])       #均值
+    p = np.bincount(tbdata["price"])
+    p_argmax = np.argmax(p)                   #众数
+    price_title = "<span style='color:green'>价格区间 ¥%.2f-¥%.2f</span> <br>" \
+              "<span style='font-size:0.8em;color:red'> 价格中位数：¥%.2f </span><br> " \
+              "<span style='font-size:0.8em;color:teal'>价格众数：¥%.2f <br> 价格均值：¥%.2f</span>" \
+              % (pricemin,pricemax,p_median,p_argmax,p_mean)
+    salesmax = tbdata["sales"].max()
+    salemin = tbdata["sales"].min()
+
+    fig = go.Figure()
+    fig.add_trace(go.Indicator(
+        mode="number",
+        value=len(goods),
+        title={"text": "商品数","font": {"color": "gold","size":20}},
+        number={"font": {"color": "gold", "size": 50}},
+        domain={"row": 0, "column": 0}
+    ))
+    fig.add_trace(go.Indicator(
+        mode="number",
+        value=len(stores),
+        title={"text": "店铺数", "font": {"color": "green", "size": 20}},
+        number={"font": {"color": "green", "size": 50}},
+        domain={"row": 1, "column": 0}
+    ))
+    fig.add_trace(go.Indicator(
+        mode="number+delta",
+        value=salesmax,
+        title={"text": "销量区间", "font": {"color": "red", "size": 20}},
+        number={"font": {"color": "red", "size": 40}},
+        delta={"position": "bottom", "reference": salesmax - salemin},
+        domain={"row": 2, "column": 0}
+    ))
+    fig.add_trace(go.Indicator(
+        mode="gauge",
+        title={"text": price_title, "font": {"color": "blue", "size": 20}},
+        delta={"position": "bottom", "reference": pricemax - pricemin},
+        gauge={"axis":{"range":[0,800]},
+               "steps":[{"range": [pricemin, pricemax], "color": "green","thickness":0.65},
+                        {"range":[p_argmax, p_mean], "color":"teal"}],
+               "threshold":{"line":{"color":"red","width":4},"thickness":1,"value":p_median}
+        },
+        domain={"row": 1, "column": 1}
+    ))
+    fig.update_layout(height=500,width=800,
+        grid={"rows": 3, "columns": 2, "pattern": "independent"})
+    fig.show()
+```
+</details>
 4.2 价格区间分析
 4.2.1 按价格区间统计商品数量
         图表如下，说明维生素价格主要在200元以下，其中50元以下最多
@@ -366,7 +427,7 @@ fig.show()
 </details>
 
 4.5 分词
-4.5.1 商品名称的词云
+    商品名称的词云
     词云显示如下，可见除了常见维生素b6，b2等，在商品名称中多包含容量数，以及买n送n宣传
     ![词云](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p16.png?raw=true)
    
@@ -385,4 +446,22 @@ fig.show()
     plt.axis("off")
     plt.show()
 ```  
-</details
+</details>
+
+4.6 按区域统计
+    可见商铺大陆主要集中在广东、浙江、上海和江苏，大陆以外主要是澳大利亚香港
+    ![区域](https://github.com/vivian315/TBdata_EDA_With_Plotly/blob/main/screenshots/p18.png?raw=true)
+   
+<details>
+    <summary> 点击展开代码 </summary>
+
+```python
+    tbdata = tbdata.groupby("province")["title"].count().reset_index()
+    tbdata = tbdata.sort_values("title",ascending=True)
+    fig = px.bar(tbdata[-20:], y="province", x="title",text="title")
+
+    fig.update_traces(textposition="inside")
+    fig.update_layout(title_text="按商铺地域的商品数量统计", barmode="stack",xaxis_title="商品数量", yaxis_title="省市地区")
+    fig.show()
+```  
+</details>
